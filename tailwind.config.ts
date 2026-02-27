@@ -47,6 +47,36 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+        },
+        kiosk: {
+          bg: "hsl(var(--kiosk-bg))",
+          foreground: "hsl(var(--kiosk-foreground))",
+          card: "hsl(var(--kiosk-card))",
+          "card-foreground": "hsl(var(--kiosk-card-foreground))",
+          accent: "hsl(var(--kiosk-accent))",
+          success: "hsl(var(--kiosk-success))",
+          warning: "hsl(var(--kiosk-warning))",
+          danger: "hsl(var(--kiosk-danger))",
+          muted: "hsl(var(--kiosk-muted))",
+          "muted-foreground": "hsl(var(--kiosk-muted-foreground))",
+        },
+        status: {
+          "clocked-in": "hsl(var(--status-clocked-in))",
+          "on-break": "hsl(var(--status-on-break))",
+          "clocked-out": "hsl(var(--status-clocked-out))",
+          "on-lunch": "hsl(var(--status-on-lunch))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,20 +95,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
