@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { MOCK_EMPLOYEES, MOCK_TIME_ENTRIES, DEFAULT_OT_CONFIG } from '@/data/mockData';
+import { MOCK_TIME_ENTRIES, DEFAULT_OT_CONFIG } from '@/data/mockData';
+import { useEmployees } from '@/hooks/useEmployees';
 import { PayrollSummary } from '@/types/workforce';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Download, FileText } from 'lucide-react';
 
-function calculatePayroll(): PayrollSummary[] {
-  return MOCK_EMPLOYEES
+function calculatePayroll(employees: ReturnType<typeof useEmployees>): PayrollSummary[] {
+  return employees
     .filter(e => e.payType === 'hourly' && e.isActive)
     .map(emp => {
       const entries = MOCK_TIME_ENTRIES.filter(t => t.employeeId === emp.id);
@@ -58,7 +59,8 @@ function exportCSV(data: PayrollSummary[]) {
 }
 
 export const AdminPayroll = () => {
-  const payroll = calculatePayroll();
+  const employees = useEmployees();
+  const payroll = calculatePayroll(employees);
   const totalGross = payroll.reduce((sum, p) => sum + p.grossPay, 0);
 
   return (

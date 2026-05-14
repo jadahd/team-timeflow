@@ -1,14 +1,20 @@
-import { MOCK_EMPLOYEES, DEPARTMENTS } from '@/data/mockData';
+import { useEmployees } from '@/hooks/useEmployees';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { AddEmployeeDialog } from './AddEmployeeDialog';
 
 export const AdminEmployees = () => {
+  const employees = useEmployees();
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-foreground">Employees</h1>
-        <span className="text-sm text-muted-foreground">{MOCK_EMPLOYEES.length} total</span>
+        <div className="flex items-center gap-4">
+          <span className="text-sm text-muted-foreground">{employees.length} total</span>
+          <AddEmployeeDialog />
+        </div>
       </div>
 
       <Card>
@@ -25,7 +31,7 @@ export const AdminEmployees = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {MOCK_EMPLOYEES.map(emp => (
+              {employees.map(emp => (
                 <TableRow key={emp.id}>
                   <TableCell>
                     <div className="flex items-center gap-3">
