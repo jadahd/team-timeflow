@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export const AdminTimeTracking = () => {
+  const employees = useEmployees();
   const entriesWithNames = MOCK_TIME_ENTRIES.map(entry => {
-    const emp = MOCK_EMPLOYEES.find(e => e.id === entry.employeeId);
+    const emp = employees.find(e => e.id === entry.employeeId);
     const start = new Date(entry.clockIn);
     const end = entry.clockOut ? new Date(entry.clockOut) : null;
     const totalMs = (end?.getTime() ?? Date.now()) - start.getTime();

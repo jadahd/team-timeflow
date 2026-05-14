@@ -16,7 +16,7 @@ export const AdminDashboardOverview = () => {
     return sum + (end - start) / 3600000;
   }, 0);
 
-  const otRisk = MOCK_EMPLOYEES.filter(e => e.payType === 'hourly').length; // simplified
+  const otRisk = employees.filter(e => e.payType === 'hourly').length; // simplified
 
   const totalGoalProgress = MOCK_GOALS.reduce((sum, g) => {
     const adj = g.manualAdjustments.reduce((s, a) => s + a.amount, 0);
@@ -25,7 +25,7 @@ export const AdminDashboardOverview = () => {
   const totalTarget = MOCK_GOALS.reduce((sum, g) => sum + g.target, 0);
 
   const stats = [
-    { label: 'Staff On Duty', value: activeCount, total: MOCK_EMPLOYEES.length, icon: Users, color: 'text-success' },
+    { label: 'Staff On Duty', value: activeCount, total: employees.length, icon: Users, color: 'text-success' },
     { label: 'Hours Today', value: totalHoursToday.toFixed(1), icon: Clock, color: 'text-info' },
     { label: 'OT Risk', value: `${otRisk}`, icon: AlertTriangle, color: 'text-warning' },
     { label: 'Sales Today', value: `$${totalGoalProgress.toLocaleString()}`, total: `$${totalTarget.toLocaleString()}`, icon: TrendingUp, color: 'text-accent' },
@@ -93,7 +93,7 @@ export const AdminDashboardOverview = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            {MOCK_EMPLOYEES.map(emp => {
+            {employees.map(emp => {
               const status = getEmployeeStatus(emp.id, MOCK_TIME_ENTRIES);
               const statusColors = {
                 'clocked-in': 'bg-success',
