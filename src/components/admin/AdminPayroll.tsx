@@ -59,7 +59,8 @@ function exportCSV(data: PayrollSummary[]) {
 }
 
 export const AdminPayroll = () => {
-  const payroll = calculatePayroll();
+  const employees = useEmployees();
+  const payroll = calculatePayroll(employees);
   const totalGross = payroll.reduce((sum, p) => sum + p.grossPay, 0);
 
   return (
