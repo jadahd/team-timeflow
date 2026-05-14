@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Employee, TimeEntry, EmployeeStatus } from '@/types/workforce';
-import { MOCK_EMPLOYEES, MOCK_TIME_ENTRIES, MOCK_ANNOUNCEMENTS, MOCK_GOALS, getEmployeeStatus, getActiveBreakReturn } from '@/data/mockData';
+import { MOCK_TIME_ENTRIES, MOCK_ANNOUNCEMENTS, MOCK_GOALS, getEmployeeStatus, getActiveBreakReturn } from '@/data/mockData';
+import { useEmployees } from '@/hooks/useEmployees';
 import { KioskInitialsGrid } from '@/components/kiosk/KioskInitialsGrid';
 import { KioskPinEntry } from '@/components/kiosk/KioskPinEntry';
 import { KioskClockActions } from '@/components/kiosk/KioskClockActions';
@@ -114,7 +115,8 @@ const KioskPage = () => {
     setTimeout(resetToIdle, 2000);
   };
 
-  const activeEmployees = MOCK_EMPLOYEES.filter(e => e.isActive);
+  const employees = useEmployees();
+  const activeEmployees = employees.filter(e => e.isActive);
   const currentStatus = selectedEmployee
     ? getEmployeeStatus(selectedEmployee.id, timeEntries)
     : 'clocked-out';
