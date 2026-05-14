@@ -1,4 +1,5 @@
-import { MOCK_EMPLOYEES, MOCK_TIME_ENTRIES } from '@/data/mockData';
+import { MOCK_TIME_ENTRIES } from '@/data/mockData';
+import { useEmployees } from '@/hooks/useEmployees';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 

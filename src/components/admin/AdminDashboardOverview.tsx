@@ -1,9 +1,11 @@
-import { MOCK_EMPLOYEES, MOCK_TIME_ENTRIES, MOCK_GOALS, getEmployeeStatus } from '@/data/mockData';
+import { MOCK_TIME_ENTRIES, MOCK_GOALS, getEmployeeStatus } from '@/data/mockData';
+import { useEmployees } from '@/hooks/useEmployees';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Clock, AlertTriangle, TrendingUp } from 'lucide-react';
 
 export const AdminDashboardOverview = () => {
-  const activeCount = MOCK_EMPLOYEES.filter(e => {
+  const employees = useEmployees();
+  const activeCount = employees.filter(e => {
     const s = getEmployeeStatus(e.id, MOCK_TIME_ENTRIES);
     return s !== 'clocked-out';
   }).length;
