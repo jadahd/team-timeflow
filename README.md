@@ -1,73 +1,116 @@
-# Welcome to your Lovable project
+# Team TimeFlow
 
-## Project info
+Kiosk-style time clock and workforce dashboard for small businesses.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Built and owned by **JD Marketing & Consulting LLC**.
 
-## How can I edit this code?
+## What it is
 
-There are several ways of editing your application.
+A single-screen tablet kiosk where staff clock in and out with a PIN, plus an
+admin dashboard for time tracking, payroll exports, announcements, and company
+branding. Designed to be white-labeled per client — every company name, logo,
+and color is configurable from the admin Company Settings page.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **Kiosk mode** — initials grid → PIN entry → clock in / out, with break and
+  lunch tracking, an announcements ticker, today's sales-goal display, and a
+  live staff board showing who's on duty.
+- **Admin dashboard** — overview, employee management, time tracking, payroll
+  calculator with CSV export, announcements, and company settings.
+- **White-label by default** — company name, short name, tagline, logo image,
+  fallback letter, primary color, accent color, timezone, and currency all
+  edit from Admin → Company Settings. Settings persist in the browser.
+- **Theme-aware** — brand colors flow through Tailwind CSS variables, so every
+  surface (sidebar, kiosk accents, buttons, focus rings) updates together.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech stack
 
-**Use your preferred IDE**
+- Vite + React 18 + TypeScript
+- Tailwind CSS + shadcn/ui (Radix primitives)
+- React Router for routing
+- Supabase (Postgres + RLS) for persistence
+- TanStack Query for client cache
+- jsPDF + jspdf-autotable for printable payroll & per-employee time cards
+- Zod + react-hook-form on validated forms
+- Vitest for tests
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Local development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Requires Node.js 18+.
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the dev server (defaults to http://localhost:8080)
 npm run dev
+
+# Run tests
+npm run test
+
+# Production build
+npm run build
+
+# Preview the production build
+npm run preview
 ```
 
-**Edit a file directly in GitHub**
+## Project structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+├── App.tsx                       # Router + providers
+├── pages/
+│   ├── Index.tsx                 # Landing page
+│   ├── KioskPage.tsx             # Tablet kiosk
+│   ├── AdminPage.tsx             # Admin shell
+│   └── NotFound.tsx
+├── components/
+│   ├── CompanyThemeProvider.tsx  # Applies brand colors at runtime
+│   ├── CompanyLogo.tsx           # Logo image or letter-tile fallback
+│   ├── admin/                    # Admin views (employees, payroll, settings, …)
+│   ├── kiosk/                    # Kiosk views (PIN entry, staff board, …)
+│   └── ui/                       # shadcn/ui primitives
+├── data/
+│   ├── companyStore.ts           # localStorage-backed company config
+│   ├── employeeStore.ts          # Employee list store
+│   └── mockData.ts               # Seed data (employees, time entries, goals)
+├── hooks/
+│   ├── useCompany.ts             # Reads + updates the company config
+│   ├── useEmployees.ts
+│   └── use-toast.ts
+├── types/
+│   ├── company.ts                # Company config type + default
+│   └── workforce.ts              # Employee, TimeEntry, Goal, …
+└── lib/
+    └── utils.ts                  # cn() helper
+```
 
-**Use GitHub Codespaces**
+## Configuring for a new company
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Open the app and navigate to **Admin → Company Settings**.
+2. Update the company name, short name, and tagline.
+3. Upload a logo image (under 500 KB) or set a one-to-two letter fallback.
+4. Pick a primary color and accent color. Changes apply across the app
+   immediately and persist between visits.
+5. Set timezone and currency for future reporting features.
 
-## What technologies are used for this project?
+The default config seeds with placeholder values — change them on first run.
 
-This project is built with:
+## Roadmap
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Data persists in Supabase (Postgres + RLS). See AUDIT.md for the current
+prioritized list of fixes and improvements. The big ones:
 
-## How can I deploy this project?
+- Real Supabase Auth for admin tier; hashed PINs via an Edge Function;
+  brute-force lockout on the kiosk PIN screen; locked-down RLS policies.
+- Audit log viewer UI (rows are already being written for every edit/delete).
+- Bulk forgotten-clock-out estimator in the UI (currently runs via SQL).
+- Per-tenant payroll config (OT threshold, multiplier, excluded roles).
+- Mobile-friendly admin layout.
+- Real test coverage on the payroll math.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## License
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Proprietary. © JD Marketing & Consulting LLC. All rights reserved.
