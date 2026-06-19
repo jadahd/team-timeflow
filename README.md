@@ -12,7 +12,7 @@ branding. Designed to be white-labeled per client — every company name, logo,
 and color is configurable from the admin Company Settings page.
 
 ## Features
-
+ 
 - **Kiosk mode** — initials grid → PIN entry → clock in / out, with break and
   lunch tracking, an announcements ticker, today's sales-goal display, and a
   live staff board showing who's on duty.
