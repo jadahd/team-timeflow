@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 30% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 30% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 30% 14%;
+
+    --primary: 215 30% 16%;
+    --primary-foreground: 45 100% 97%;
+
+    --secondary: 210 18% 93%;
+    --secondary-foreground: 215 30% 14%;
+
+    --muted: 210 14% 95%;
+    --muted-foreground: 215 12% 50%;
+
+    --accent: 38 90% 45%;
+    --accent-foreground: 45 100% 97%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 215 30% 14%;
+
+    --info: 205 80% 50%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 38 90% 45%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 215 30% 14%;
+    --sidebar-foreground: 210 14% 85%;
+    --sidebar-primary: 38 90% 45%;
+    --sidebar-primary-foreground: 45 100% 97%;
+    --sidebar-accent: 215 28% 20%;
+    --sidebar-accent-foreground: 210 14% 85%;
+    --sidebar-border: 215 25% 22%;
+    --sidebar-ring: 38 90% 45%;
+
+    /* Kiosk-specific tokens */
+    --kiosk-bg: 215 30% 10%;
+    --kiosk-foreground: 210 14% 92%;
+    --kiosk-card: 215 28% 16%;
+    --kiosk-card-foreground: 210 14% 92%;
+    --kiosk-accent: 38 90% 45%;
+    --kiosk-success: 152 60% 45%;
+    --kiosk-warning: 38 92% 50%;
+    --kiosk-danger: 0 72% 55%;
+    --kiosk-muted: 215 20% 25%;
+    --kiosk-muted-foreground: 215 12% 55%;
+
+    /* Status colors */
+    --status-clocked-in: 152 60% 40%;
+    --status-on-break: 38 92% 50%;
+    --status-clocked-out: 215 12% 50%;
+    --status-on-lunch: 205 80% 50%;
+  }
+
+  .dark {
+    --background: 215 30% 10%;
+    --foreground: 210 14% 92%;
+
+    --card: 215 28% 14%;
+    --card-foreground: 210 14% 92%;
+
+    --popover: 215 28% 14%;
+    --popover-foreground: 210 14% 92%;
+
+    --primary: 38 90% 45%;
+    --primary-foreground: 215 30% 10%;
+
+    --secondary: 215 28% 20%;
+    --secondary-foreground: 210 14% 85%;
+
+    --muted: 215 20% 18%;
+    --muted-foreground: 215 12% 55%;
+
+    --accent: 38 90% 45%;
+    --accent-foreground: 215 30% 10%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 25% 22%;
+    --input: 215 25% 22%;
+    --ring: 38 90% 45%;
+
+    --sidebar-background: 215 32% 8%;
+    --sidebar-foreground: 210 14% 85%;
+    --sidebar-primary: 38 90% 45%;
+    --sidebar-primary-foreground: 215 30% 10%;
+    --sidebar-accent: 215 28% 14%;
+    --sidebar-accent-foreground: 210 14% 85%;
+    --sidebar-border: 215 25% 16%;
+    --sidebar-ring: 38 90% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer utilities {
+  .kiosk-bg {
+    background-color: hsl(var(--kiosk-bg));
+    color: hsl(var(--kiosk-foreground));
+  }
+
+  .kiosk-card {
+    background-color: hsl(var(--kiosk-card));
+    color: hsl(var(--kiosk-card-foreground));
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
